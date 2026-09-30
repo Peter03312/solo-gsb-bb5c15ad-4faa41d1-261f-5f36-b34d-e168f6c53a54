@@ -1,0 +1,15 @@
+services:
+  evacuation:
+    build: .
+    image: evacuation-planner:latest
+    container_name: evacuation-planner
+    ports:
+      - "${EVAC_PORT:-8000}:8000"
+    environment:
+      EVAC_DB_PATH: /data/evacuation.db
+    volumes:
+      - evac_data:/data
+    restart: unless-stopped
+
+volumes:
+  evac_data:
